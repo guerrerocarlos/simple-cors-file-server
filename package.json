@@ -1,6 +1,6 @@
 {
   "name": "simple-cors-file-server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple one file Server",
   "main": "index.js",
   "scripts": {
