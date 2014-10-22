@@ -28,7 +28,7 @@ function stopServer(cb) {
 }
 
 var simpleFileServer = {
-    start: function (src, cb) {
+    start: function (src, port, cb) {
         try {
             fs.readFile(src, {}, function (err, data) {
                 subData = data;
