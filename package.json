@@ -1,0 +1,26 @@
+{
+  "name": "simple-cors-file-server",
+  "version": "0.0.2",
+  "description": "Simple one file Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:guerrerocarlos/simple-cors-file-server.git"
+  },
+  "keywords": [
+    "cors",
+    "file-server",
+    "server"
+  ],
+  "author": "Carlos Guerrero <guerrerocarlos@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guerrerocarlos/simple-cors-file-server/issues"
+  },
+  "homepage": "https://github.com/guerrerocarlos/simple-cors-file-server",
+  "dependencies": {
+  }
+}
