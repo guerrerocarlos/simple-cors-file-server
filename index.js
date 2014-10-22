@@ -2,7 +2,6 @@ var server;
 var httpServer;
 var subData = '';
 var http = require('http');
-var iconv = require('iconv-lite');
 var fs = require('fs')
 
 server = http.createServer(function (req, res) {
