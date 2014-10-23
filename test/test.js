@@ -1,3 +1,3 @@
-var subtitles_server = require("../index")
+var server = new (require("../index"))()
 
-subtitles_server.start("./test/subtitles.vtt", 7777, function(){"Server closed"})
+server.start("./test/subtitles.vtt", function(){"Server closed"})

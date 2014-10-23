@@ -1,51 +1,50 @@
-var server;
-var httpServer;
-var subData = '';
 var http = require('http');
 var fs = require('fs')
 
-server = http.createServer(function (req, res) {
-    if (req.headers.origin) {
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
-    }
+function SimpleServer(){
+    var self = this
 
-    res.writeHead(200, {
-        'Content-Type': 'text/vtt'
+    self.server = http.createServer(function (req, res) {
+        if (req.headers.origin) {
+            res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        }
+
+        res.writeHead(200, {
+        });
+        res.end(self.subData);
     });
-    res.end(subData);
-});
 
-function startListening(port, cb) {
-    httpServer = server.listen(port);
-}
+};
 
-function stopServer(cb) {
-    httpServer.close(function () {
+SimpleServer.prototype.startListening = function(cb) {
+    var self = this
+    self.httpServer = self.server.listen(9999);
+};
+
+SimpleServer.prototype.stopServer = function(cb) {
+    console.log("RESTARTING SIMPLE SERVER")
+    var self = this
+    self.httpServer.close(function () {
         if (cb) {
             cb();
         }
     });
-}
-
-var simpleFileServer = {
-    start: function (src, port, cb) {
-        try {
-            fs.readFile(src, {}, function (err, data) {
-                subData = data;
-                if (httpServer) {
-                    stopServer(startListening(port, cb));
-                } else {
-                    startListening(cb);
-                }
-            });
-        } catch (e) {
-            console.log('Error Reading vtt');
-        }
-    },
-
-    stop: function () {
-        stopServer();
-    }
 };
 
-module.exports = simpleFileServer
+SimpleServer.prototype.start = function(src, cb) {
+        var self = this
+        //try {
+            fs.readFile(src, {}, function (err, data) {
+                self.subData = data;
+                if (self.httpServer) {
+                    self.stopServer(function(){ self.startListening(cb) });
+                } else {
+                    self.startListening(cb);
+                }
+            });
+        //} catch (e) {
+          //  console.log('Error Reading vtt');
+        //}
+    }
+
+module.exports = SimpleServer
